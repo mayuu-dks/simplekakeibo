@@ -7,9 +7,11 @@ interface ExpenseCategoryCardProps {
   onAddItem: (categoryId: string, item: Omit<ExpenseItem, 'id'>) => void;
   onRemoveItem: (categoryId: string, itemId: string) => void;
   onUpdateBudget: (categoryId: string, budget: number) => void;
+  onUpdateCategoryTitle: (categoryId: string, newTitle: string) => void;
+  onRemoveCategory: (categoryId: string) => void;
 }
 
-const ExpenseCategoryCard: React.FC<ExpenseCategoryCardProps> = ({ category, onAddItem, onRemoveItem, onUpdateBudget }) => {
+const ExpenseCategoryCard: React.FC<ExpenseCategoryCardProps> = ({ category, onAddItem, onRemoveItem, onUpdateBudget, onUpdateCategoryTitle, onRemoveCategory }) => {
   const totalSpent = useMemo(() => {
     return category.items.reduce((sum, item) => sum + item.amount, 0);
   }, [category.items]);
@@ -27,7 +29,25 @@ const ExpenseCategoryCard: React.FC<ExpenseCategoryCardProps> = ({ category, onA
 
   return (
     <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-4 flex flex-col h-full">
-      <h3 className="text-lg font-bold text-slate-800 mb-2">{category.title}</h3>
+      <div className="flex items-center mb-2 gap-2">
+        <input
+          type="text"
+          value={category.title}
+          onChange={e => onUpdateCategoryTitle(category.id, e.target.value)}
+          className="text-lg font-bold text-slate-800 bg-transparent border-b border-dashed border-pink-300 focus:border-pink-500 outline-none flex-grow min-w-0"
+        />
+        <button
+          onClick={() => {
+            if (window.confirm('このカテゴリを削除しますか？（中の支出も全て消えます）')) {
+              onRemoveCategory(category.id);
+            }
+          }}
+          className="text-red-400 hover:text-red-600 p-1"
+          title="カテゴリ削除"
+        >
+          <Trash2 size={18} />
+        </button>
+      </div>
       <div className="mb-4 text-sm text-slate-500">
         予算: ¥
         <input 

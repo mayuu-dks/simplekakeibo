@@ -103,6 +103,33 @@ const App: React.FC = () => {
         }));
     }, [updateActiveMonth]);
 
+    // カテゴリ追加・編集・削除ハンドラ
+    const handleAddCategory = useCallback((title: string, budget: number) => {
+        updateActiveMonth((m: MonthData) => ({
+            ...m,
+            categories: [
+                ...m.categories,
+                { id: `cat_${Date.now()}_${title}`, title, budget, items: [] }
+            ]
+        }));
+    }, [updateActiveMonth]);
+
+    const handleUpdateCategoryTitle = useCallback((categoryId: string, newTitle: string) => {
+        updateActiveMonth((m: MonthData) => ({
+            ...m,
+            categories: m.categories.map(cat =>
+                cat.id === categoryId ? { ...cat, title: newTitle } : cat
+            )
+        }));
+    }, [updateActiveMonth]);
+
+    const handleRemoveCategory = useCallback((categoryId: string) => {
+        updateActiveMonth((m: MonthData) => ({
+            ...m,
+            categories: m.categories.filter(cat => cat.id !== categoryId)
+        }));
+    }, [updateActiveMonth]);
+
     // handleExpenseParsed 削除
     
     const handleUpdateMemo = useCallback((memo: string) => {
@@ -197,7 +224,24 @@ const App: React.FC = () => {
 
                  <div className="mb-8">
                     <h2 className="text-xl font-bold text-slate-700 mb-4 border-b-2 border-pink-300 pb-2">使ったお金メモ</h2>
-                    {/* SmartInput削除。カテゴリごとの手動追加フォームのみ表示 */}
+                    {/* カテゴリ追加フォーム */}
+                    <form
+                        onSubmit={e => {
+                            e.preventDefault();
+                            const form = e.currentTarget;
+                            const title = (form.elements.namedItem('categoryTitle') as HTMLInputElement).value.trim();
+                            const budget = parseInt((form.elements.namedItem('categoryBudget') as HTMLInputElement).value) || 0;
+                            if (title) {
+                                handleAddCategory(title, budget);
+                                form.reset();
+                            }
+                        }}
+                        className="flex flex-col md:flex-row items-start md:items-end gap-2 mb-6"
+                    >
+                        <input name="categoryTitle" type="text" placeholder="新しいカテゴリ名" className="p-2 border rounded w-full md:w-64" required />
+                        <input name="categoryBudget" type="number" placeholder="予算（任意）" className="p-2 border rounded w-full md:w-40" min="0" />
+                        <button type="submit" className="bg-pink-500 text-white px-4 py-2 rounded font-semibold hover:bg-pink-600 transition-colors">カテゴリ追加</button>
+                    </form>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {categories.map(cat => (
                             <ExpenseCategoryCard 
@@ -206,6 +250,8 @@ const App: React.FC = () => {
                                 onAddItem={handleAddItem} 
                                 onRemoveItem={handleRemoveItem}
                                 onUpdateBudget={handleUpdateBudget}
+                                onUpdateCategoryTitle={handleUpdateCategoryTitle}
+                                onRemoveCategory={handleRemoveCategory}
                             />
                         ))}
                     </div>
