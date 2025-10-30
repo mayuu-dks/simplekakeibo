@@ -33,13 +33,13 @@ const Header: React.FC<HeaderProps> = ({ activeMonthId, onDownload, onReset, onO
           <div className="text-xl font-semibold tracking-wider" style={{color: '#566C8D'}}>{displayMonth}</div>
           <div className="text-sm" style={{color: '#566C8D', opacity: 0.9}}>{displayYear}年</div>
         </div>
-               <div className="flex items-center space-x-3">
+               <div className="flex flex-col space-y-2">
                  <button
                    onClick={(e) => {
                      (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#0F6B7A';
                      onOpenDataManagement();
                    }}
-                   className="px-4 py-2 rounded-lg font-medium transition-colors duration-200 flex items-center space-x-2"
+                   className="px-3 py-1.5 rounded-lg font-medium transition-colors duration-200 flex items-center space-x-2 text-sm"
                    style={{backgroundColor: '#0F6B7A', color: '#F4E7C8'}}
                    onMouseEnter={(e) => (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#0D5A64'}
                    onMouseLeave={(e) => (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#0F6B7A'}
@@ -50,10 +50,14 @@ const Header: React.FC<HeaderProps> = ({ activeMonthId, onDownload, onReset, onO
                  <button
                    onClick={onDownload}
                    aria-label="現在の月をHTMLとしてダウンロード"
-                   className="p-2 rounded-full transition-colors duration-200" style={{color: '#566C8D'}} onMouseEnter={(e) => {e.target.style.backgroundColor = '#F0E5C8'; e.target.style.color = '#455A75'}} onMouseLeave={(e) => {e.target.style.backgroundColor = 'transparent'; e.target.style.color = '#566C8D'}}
+                   className="px-3 py-1.5 rounded-lg transition-colors duration-200 flex items-center space-x-2 text-sm" 
+                   style={{color: '#566C8D'}} 
+                   onMouseEnter={(e) => {(e.currentTarget as HTMLButtonElement).style.backgroundColor = '#F0E5C8'; (e.currentTarget as HTMLButtonElement).style.color = '#455A75'}} 
+                   onMouseLeave={(e) => {(e.currentTarget as HTMLButtonElement).style.backgroundColor = 'transparent'; (e.currentTarget as HTMLButtonElement).style.color = '#566C8D'}}
                    title="HTMLダウンロード"
                  >
-                   <Download className="w-6 h-6" />
+                   <Download className="w-4 h-4" />
+                   <span>HTML出力</span>
                  </button>
                </div>
       </div>
