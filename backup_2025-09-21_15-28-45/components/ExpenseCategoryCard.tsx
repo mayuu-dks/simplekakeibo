@@ -62,13 +62,13 @@ const ExpenseCategoryCard: React.FC<ExpenseCategoryCardProps> = ({
   };
 
   return (
-    <div className="rounded-lg shadow-sm border p-4 flex flex-col h-full" style={{backgroundColor: '#8E8892', borderColor: '#7A7580'}}>
+    <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-4 flex flex-col h-full">
       <div className="flex items-center mb-2 gap-2">
         <input
           type="text"
           value={category.title}
           onChange={e => onUpdateCategoryTitle(category.id, e.target.value)}
-          className="text-lg font-bold bg-transparent border-b border-dashed outline-none flex-grow min-w-0" style={{borderBottomColor: '#566C8D', color: '#F4E7C8'}} onFocus={(e) => e.target.style.borderBottomColor = '#455A75'} onBlur={(e) => e.target.style.borderBottomColor = '#566C8D'}
+          className="text-lg font-bold text-slate-800 bg-transparent border-b border-dashed border-pink-300 focus:border-pink-500 outline-none flex-grow min-w-0"
         />
         <button
           onClick={() => {
@@ -82,7 +82,7 @@ const ExpenseCategoryCard: React.FC<ExpenseCategoryCardProps> = ({
           <Trash2 size={18} />
         </button>
       </div>
-      <div className="mb-4 text-sm" style={{color: '#F4E7C8'}}>
+      <div className="mb-4 text-sm text-slate-500">
         予算: ¥
         <input 
             type="number" 
@@ -103,13 +103,13 @@ const ExpenseCategoryCard: React.FC<ExpenseCategoryCardProps> = ({
                     type="text"
                     value={editName}
                     onChange={(e) => setEditName(e.target.value)}
-                    className="flex-grow p-1 text-xs border rounded bg-white focus:outline-none" style={{borderColor: '#566C8D'}} onFocus={(e) => e.target.style.borderColor = '#455A75'} onBlur={(e) => e.target.style.borderColor = '#566C8D'}
+                    className="flex-grow p-1 text-xs border rounded bg-white focus:ring-1 focus:ring-pink-400 focus:outline-none"
                   />
                   <input
                     type="number"
                     value={editAmount}
                     onChange={(e) => setEditAmount(e.target.value)}
-                    className="w-16 p-1 text-xs border rounded bg-white focus:outline-none" style={{borderColor: '#566C8D'}} onFocus={(e) => e.target.style.borderColor = '#455A75'} onBlur={(e) => e.target.style.borderColor = '#566C8D'}
+                    className="w-16 p-1 text-xs border rounded bg-white focus:ring-1 focus:ring-pink-400 focus:outline-none"
                   />
                   <button 
                     onClick={handleSaveEdit}
@@ -129,9 +129,9 @@ const ExpenseCategoryCard: React.FC<ExpenseCategoryCardProps> = ({
               ) : (
                 // 表示モード
                 <>
-                  <span className="truncate flex-grow" style={{color: '#F4E7C8'}}>{item.name}</span>
+                  <span className="text-slate-700 truncate flex-grow">{item.name}</span>
                   <div className="flex items-center space-x-2">
-                    <span style={{color: '#F4E7C8'}}>¥{item.amount.toLocaleString()}</span>
+                    <span className="text-slate-500">¥{item.amount.toLocaleString()}</span>
                     <button 
                       onClick={() => handleStartEdit(item)} 
                       className="text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity p-1"
@@ -152,19 +152,19 @@ const ExpenseCategoryCard: React.FC<ExpenseCategoryCardProps> = ({
             </div>
           ))
         ) : (
-          <p className="text-sm italic" style={{color: '#F4E7C8'}}>まだ支出がありません。</p>
+          <p className="text-slate-400 text-sm italic">まだ支出がありません。</p>
         )}
       </div>
        <form onSubmit={handleAddItem} className="mt-auto flex items-center space-x-2 border-t pt-3">
-            <input name="itemName" type="text" placeholder="新しい項目" className="flex-grow p-1 text-sm border rounded bg-slate-50 focus:outline-none" style={{borderColor: '#566C8D'}} onFocus={(e) => e.target.style.borderColor = '#455A75'} onBlur={(e) => e.target.style.borderColor = '#566C8D'}/>
-            <input name="itemAmount" type="number" placeholder="金額" className="w-20 p-1 text-sm border rounded bg-slate-50 focus:outline-none" style={{borderColor: '#566C8D'}} onFocus={(e) => e.target.style.borderColor = '#455A75'} onBlur={(e) => e.target.style.borderColor = '#566C8D'}/>
-            <button type="submit" style={{color: '#566C8D'}} onMouseEnter={(e) => e.target.style.color = '#455A75'} onMouseLeave={(e) => e.target.style.color = '#566C8D'}>
+            <input name="itemName" type="text" placeholder="新しい項目" className="flex-grow p-1 text-sm border rounded bg-slate-50 focus:ring-1 focus:ring-pink-400 focus:outline-none"/>
+            <input name="itemAmount" type="number" placeholder="金額" className="w-20 p-1 text-sm border rounded bg-slate-50 focus:ring-1 focus:ring-pink-400 focus:outline-none"/>
+            <button type="submit" className="text-pink-500 hover:text-pink-600">
                 <PlusCircle size={20} />
             </button>
         </form>
       <div className="border-t border-dashed mt-4 pt-2 flex justify-between items-center font-semibold">
-        <span style={{color: '#F4E7C8'}}>合計:</span>
-        <span style={{color: totalSpent > category.budget && category.budget > 0 ? '#FF6B6B' : '#F4E7C8'}}>
+        <span className="text-slate-600">合計:</span>
+        <span className={`text-slate-800 ${totalSpent > category.budget && category.budget > 0 ? 'text-red-500' : ''}`}>
           ¥{totalSpent.toLocaleString()}
         </span>
       </div>

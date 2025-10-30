@@ -27,22 +27,11 @@ const MonthTabs: React.FC<MonthTabsProps> = ({ months, activeMonthId, onSelectMo
           <button
             key={monthId}
             onClick={() => onSelectMonth(monthId)}
-            className={`px-4 py-2 text-sm font-semibold whitespace-nowrap rounded-t-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 font-kaisei ${
+            className={`px-4 py-2 text-sm font-semibold whitespace-nowrap rounded-t-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 font-kaisei ${
               activeMonthId === monthId
-                ? 'border-b-2'
-                : 'hover:bg-slate-100'
+                ? 'border-b-2 border-pink-500 text-pink-600 bg-pink-50'
+                : 'text-slate-500 hover:text-slate-800 hover:bg-slate-100'
             }`}
-            style={activeMonthId === monthId ? {borderBottomColor: '#566C8D', color: '#566C8D', backgroundColor: '#F4E7C8'} : {color: '#F4E7C8'}}
-            onMouseEnter={(e) => {
-              if (activeMonthId !== monthId) {
-                e.target.style.color = '#8E8892';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (activeMonthId !== monthId) {
-                e.target.style.color = '#F4E7C8';
-              }
-            }}
           >
             {formatMonth(monthId)}
           </button>
@@ -59,7 +48,7 @@ const MonthTabs: React.FC<MonthTabsProps> = ({ months, activeMonthId, onSelectMo
         </button>
         <button
           onClick={onAddMonth}
-          className="flex items-center space-x-1 px-3 py-2 text-sm font-semibold bg-white border border-slate-200 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2" style={{color: '#566C8D'}} onMouseEnter={(e) => {e.target.style.backgroundColor = '#F4E7C8'; e.target.style.borderColor = '#566C8D'}} onMouseLeave={(e) => {e.target.style.backgroundColor = 'white'; e.target.style.borderColor = '#cbd5e1'}}
+          className="flex items-center space-x-1 px-3 py-2 text-sm font-semibold text-pink-500 bg-white border border-slate-200 rounded-md hover:bg-pink-50 hover:border-pink-300 transition-colors focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2"
           aria-label="月を追加"
         >
           <Plus size={16} />

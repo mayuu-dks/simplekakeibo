@@ -603,7 +603,7 @@ const App: React.FC = () => {
     }, [allMonthsData, activeMonthId]);
 
     return (
-        <div className="min-h-screen font-mplus" style={{backgroundColor: '#746155', color: '#2D1B1B'}}>
+        <div className="min-h-screen bg-light-bg font-mplus text-slate-800">
             <Header 
                 activeMonthId={activeMonthId} 
                 onDownload={handleDownloadHtml} 
@@ -627,25 +627,25 @@ const App: React.FC = () => {
                     <SummaryCard title="収入" amount={totalIncome} color="blue" icon={<DollarSign className="text-blue-500" />}>
                         <div className="space-y-2">
                             <div>
-                                <label className="text-xs font-medium" style={{color: '#F4E7C8'}}>月収（手取り）</label>
+                                <label className="text-xs text-blue-600 font-medium">月収（手取り）</label>
                                 <input 
                                     type="number" 
                                     value={income} 
                                     onChange={e => handleUpdateIncome(Number(e.target.value))} 
                                     onFocus={e => e.target.select()}
-                                    className="w-full p-1 rounded text-sm" style={{backgroundColor: '#F4E7C8', border: '1px solid #E5D4B1', color: '#746155'}} 
+                                    className="w-full p-1 rounded bg-blue-50 border border-blue-200 text-sm" 
                                 />
                             </div>
                             {extraIncome > 0 && (
                                 <div>
-                                    <label className="text-xs font-medium" style={{color: '#F4E7C8'}}>臨時収入</label>
+                                    <label className="text-xs text-green-600 font-medium">臨時収入</label>
                                     <div className="flex items-center space-x-1">
                                         <input 
                                             type="number" 
                                             value={extraIncome} 
                                             onChange={e => handleUpdateExtraIncome(Number(e.target.value))} 
                                             onFocus={e => e.target.select()}
-                                            className="flex-1 p-1 rounded text-sm" style={{backgroundColor: '#F4E7C8', border: '1px solid #E5D4B1', color: '#746155'}} 
+                                            className="flex-1 p-1 rounded bg-green-50 border border-green-200 text-sm" 
                                         />
                                         <button
                                             onClick={() => handleUpdateExtraIncome(0)}
@@ -662,34 +662,33 @@ const App: React.FC = () => {
                             {extraIncome === 0 && (
                                 <button
                                     onClick={() => handleUpdateExtraIncome(1)}
-                                    className="w-full flex items-center justify-center space-x-1 bg-green-50 hover:bg-green-100 p-2 rounded transition-colors text-sm font-kaisei"
-                                    style={{color: '#566C8D', textShadow: '0 0 3px #f0fdf4, 0 0 3px #f0fdf4, 0 0 3px #f0fdf4'}}
+                                    className="w-full flex items-center justify-center space-x-1 text-green-600 hover:bg-green-50 p-2 rounded transition-colors text-sm"
                                 >
-                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{filter: 'drop-shadow(0 0 3px #f0fdf4) drop-shadow(0 0 3px #f0fdf4)'}}>
+                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                                     </svg>
                                     <span>臨時収入を追加</span>
                                 </button>
                             )}
                             <div className="pt-2 border-t border-blue-200">
-                                <div className="text-xs font-medium" style={{color: '#F4E7C8'}}>総収入: ¥{totalIncome.toLocaleString()}</div>
+                                <div className="text-xs text-blue-700 font-medium">総収入: ¥{totalIncome.toLocaleString()}</div>
                             </div>
                         </div>
                     </SummaryCard>
-                    <SummaryCard title="先取り貯蓄額" amount={preemptiveSavings} color="pink" icon={<PiggyBank style={{color: '#566C8D'}} />}>
+                    <SummaryCard title="先取り貯蓄額" amount={preemptiveSavings} color="pink" icon={<PiggyBank className="text-pink-500" />}>
                          <input 
                              type="number" 
                              value={preemptiveSavings} 
                              onChange={e => handleUpdatePreemptiveSavings(Number(e.target.value))} 
                              onFocus={e => e.target.select()}
-                             className="w-full p-1 rounded" style={{backgroundColor: '#F4E7C8', border: '1px solid #E5D4B1', color: '#746155'}} 
+                             className="w-full p-1 rounded bg-pink-50 border border-pink-200" 
                          />
                     </SummaryCard>
                     <SummaryCard title="必ず出ていくお金（固定費）" amount={totalFixedExpenses} color="slate" icon={<ReceiptText className="text-slate-500" />}>
-                       <p className="text-xs" style={{color: '#F4E7C8'}}>内訳は下記で編集できます。</p>
+                       <p className="text-xs text-slate-500">内訳は下記で編集できます。</p>
                     </SummaryCard>
                     <SummaryCard title="やりくり費" amount={discretionarySpending} color="green" icon={<Wallet className="text-green-500" />}>
-                        <p className="text-xs" style={{color: '#F4E7C8'}}>この金額が変動費の予算です。</p>
+                        <p className="text-xs text-green-700">この金額が変動費の予算です。</p>
                     </SummaryCard>
                 </div>
 
@@ -718,7 +717,7 @@ const App: React.FC = () => {
                                    setCategoryFreeMemos(prev => ({ ...prev, [newCategoryId]: '' }));
                                }
                            }}
-                           className="bg-secondary hover:bg-gray-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2" style={{color: '#F4E7C8'}}
+                           className="bg-secondary hover:bg-gray-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2"
                        >
                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -731,7 +730,7 @@ const App: React.FC = () => {
                            const memo = categoryFreeMemos[cat.id] || '';
                            const total = calcFreeMemoTotal(memo);
                            return (
-                               <div key={cat.id} className="rounded-lg shadow-sm border p-4 flex flex-col h-full" style={{backgroundColor: '#F4E7C8', borderColor: '#E5D4B1'}}>
+                               <div key={cat.id} className="bg-white rounded-lg shadow-sm border border-slate-200 p-4 flex flex-col h-full">
                                    <div className="flex items-center mb-2 gap-2">
                                        <input
                                            type="text"
@@ -793,11 +792,11 @@ const App: React.FC = () => {
                                            }
                                        }}
                                        placeholder="自由にメモを記入\n例: スーパー 1200\n-500\n100×3\n(家族分 3000)"
-                                       className="w-full p-2 text-base border-2 rounded-lg shadow-inner focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all mb-2" style={{borderColor: '#E5D4B1', backgroundColor: '#FDFBF7'}}
+                                       className="w-full p-2 text-base border-2 border-slate-200 rounded-lg shadow-inner bg-white focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all mb-2"
                                        style={{ height: categoryTextareaHeights[cat.id] || 'auto', minHeight: '120px' }}
                                        rows={6}
                                    />
-                                   <div className="text-right text-lg font-bold" style={{color: '#566C8D'}}>合計: ¥{total.toLocaleString()}</div>
+                                   <div className="text-right text-lg font-bold text-pink-600">合計: ¥{total.toLocaleString()}</div>
                                </div>
                            );
                        })}
@@ -806,10 +805,10 @@ const App: React.FC = () => {
 
                 <div className="mb-8">
                      <h2 className="text-xl font-bold text-dark mb-4 border-b-2 border-primary pb-2 font-kaisei">今月のまとめ</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 rounded-lg shadow-md border" style={{backgroundColor: '#8E8892', borderColor: '#7A7580'}}>
-                         <SummaryCard title="今月使ったお金の合計" amount={totalSpentThisMonth} color="slate" icon={<BarChart2 className="text-slate-500" />} isSummarySection={true} customAmountColor="#566C8D" />
-                         <SummaryCard title="残りのやりくり費" amount={remainingDiscretionary} color="blue" icon={<Wallet className="text-blue-500" />} isSummarySection={true} customAmountColor="#566C8D" />
-                         <SummaryCard title="今月の貯蓄額" amount={totalSavingsThisMonth} color="green" icon={<PiggyBank className="text-green-500" />} isSummarySection={true} customAmountColor="#566C8D" />
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-white p-6 rounded-lg shadow-md">
+                         <SummaryCard title="今月使ったお金の合計" amount={totalSpentThisMonth} color="slate" icon={<BarChart2 className="text-slate-500" />} />
+                         <SummaryCard title="残りのやりくり費" amount={remainingDiscretionary} color="blue" icon={<Wallet className="text-blue-500" />} />
+                         <SummaryCard title="今月の貯蓄額" amount={totalSavingsThisMonth} color="green" icon={<PiggyBank className="text-green-500" />} />
                     </div>
                 </div>
 
@@ -819,17 +818,17 @@ const App: React.FC = () => {
                         value={memo}
                         onChange={(e) => handleUpdateMemo(e.target.value)}
                         placeholder="今月の振り返りや来月の目標などを自由に記入できます..."
-                        className="w-full p-4 text-base border-2 rounded-lg shadow-inner focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" style={{borderColor: '#E5D4B1', backgroundColor: '#FDFBF7'}}
+                        className="w-full p-4 text-base border-2 border-slate-200 rounded-lg shadow-inner bg-white focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
                         rows={5}
                     />
                 </div>
 
             </main>
             
-            <footer className="w-full py-6 mt-12" style={{backgroundColor: '#F4E7C8'}}>
+            <footer className="w-full bg-primary py-6 mt-12">
                 <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center">
-                        <p className="font-mplus" style={{color: '#566C8D', opacity: 0.9}}>
+                        <p className="text-white opacity-90 font-mplus">
                             © 2025 MayuÜ. All rights reserved.
                         </p>
                     </div>

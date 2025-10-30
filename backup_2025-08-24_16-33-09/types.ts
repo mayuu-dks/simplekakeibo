@@ -22,7 +22,6 @@ export interface ParsedExpense {
 export interface MonthData {
   monthId: string; // YYYY-MM format, e.g., "2023-09"
   income: number;
-  extraIncome: number;
   preemptiveSavings: number;
   fixedExpenses: FixedExpense[];
   categories: ExpenseCategory[];
